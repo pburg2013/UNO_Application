@@ -53,8 +53,16 @@ namespace UNO_APPLICATION
        
         public string GetInitials()
         {
-            if(initials=="")
-                 initials = ShowDialog("Enter your initials ", "Welcome to User!");
+            if (initials == "")
+            {
+                initials = ShowDialog("Welcome to Ultimate Uno! Ready to play?  Enter your initials to begin! ", "Welcome User!");
+                if (initials == "")
+                    GetInitials();
+                else
+                    return initials; 
+            }
+                
+            
             return initials;
         }
         public static string ShowDialog(string text, string caption)
@@ -67,7 +75,7 @@ namespace UNO_APPLICATION
                 Text = caption,
                 StartPosition = FormStartPosition.CenterScreen
             };
-            Label textLabel = new Label() { Left = 50, Top = 20, Text = text };
+            Label textLabel = new Label() { Left = 50,Width = 350,  Top = 20, Text = text };
             TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 400 };
             Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
             confirmation.Click += (sender, e) => { prompt.Close(); };
